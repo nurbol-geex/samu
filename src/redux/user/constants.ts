@@ -1,0 +1,19 @@
+export const USER = 'user';
+export const SIGN_UP_REQUEST = `${USER}/signUpAction`;
+export const LOGIN_REQUEST = `${USER}/loginAction`;
+export const EMAIL_LOGIN_REQUEST = `${USER}/emailLoginAction`;
+export const PHONE_CONFIRM_REQUEST = `${USER}/phoneConfirmAction`;
+export const LOGIN_PHONE_CONFIRM_REQUEST = `${USER}/loginPhoneConfirmAction`;
+export const REVERSE_GEOCODING_REQUEST = `${USER}/reverseGeocodingAction`;
+export const CREATE_ADDRESS_REQUEST = `${USER}/createAddressAction`;
+export const UPDATE_ADDRESS_REQUEST = `${USER}/updateAddressAction`;
+export const DELETE_ADDRESS_REQUEST = `${USER}/deleteAddressAction`;
+export const LOGOUT = `${USER}/logoutAction`;
+export const GUEST_LOGIN = `${USER}/guestAction`;
+export const DELETE_ACCOUNT = `${USER}/deleteAccountAction`;
+export const GET_USER_ADDRESSES_REQUEST = `${USER}/getUserAddressesAction`;
+export const SOCIAL_AUTH = `${USER}/soicalAuth`;
+export const ANALYTICS = `${USER}/analytics`;
+export const UPDATE_PROFIlE = `${USER}/updateProfile`;
+export const HELP_DESK = `${USER}/getHelpDesk`;
+

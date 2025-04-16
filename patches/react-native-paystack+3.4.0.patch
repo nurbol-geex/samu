@@ -1,0 +1,88 @@
+diff --git a/node_modules/react-native-paystack/android/build.gradle.orig b/node_modules/react-native-paystack/android/build.gradle.orig
+new file mode 100644
+index 0000000..89f7751
+--- /dev/null
++++ b/node_modules/react-native-paystack/android/build.gradle.orig
+@@ -0,0 +1,46 @@
++
++apply plugin: 'com.android.library'
++
++def DEFAULT_COMPILE_SDK_VERSION             = 28
++def DEFAULT_TARGET_SDK_VERSION              = 28
++def DEFAULT_SUPPORT_LIB_VERSION             = "28.0.0"
++def DEFAULT_MIN_SDK_VERSION                 = 16
++
++def safeExtGet(prop, fallback) {
++    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
++}
++
++android {
++    compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
++
++    defaultConfig {
++        minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
++        targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
++    }
++
++    packagingOptions {
++        exclude 'META-INF/LICENSE'
++        exclude 'META-INF/DEPENDENCIES.txt'
++        exclude 'META-INF/LICENSE.txt'
++        exclude 'META-INF/NOTICE.txt'
++        exclude 'META-INF/NOTICE'
++        exclude 'META-INF/DEPENDENCIES'
++        exclude 'META-INF/notice.txt'
++        exclude 'META-INF/license.txt'
++        exclude 'META-INF/dependencies.txt'
++        exclude 'META-INF/LGPL2.1'
++    }
++
++    lintOptions {
++        disable 'InvalidPackage'
++    }
++}
++
++dependencies {
++    implementation fileTree(dir: "libs", include: ["*.jar"])
++    implementation "com.facebook.react:react-native:+"
++    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
++    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
++   implementation 'co.paystack.android.design.widget:pinpad:1.0.8'
++  implementation 'co.paystack.android:paystack:3.1.3'   
++}
+\ No newline at end of file
+diff --git a/node_modules/react-native-paystack/android/build.gradle.rej b/node_modules/react-native-paystack/android/build.gradle.rej
+new file mode 100644
+index 0000000..8c15177
+--- /dev/null
++++ b/node_modules/react-native-paystack/android/build.gradle.rej
+@@ -0,0 +1,7 @@
++@@ -41,6 +41,6 @@
++     implementation "com.facebook.react:react-native:+"
++     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
++     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
++ 
++   implementation 'co.paystack.android.design.widget:pinpad:1.0.8'
++  implementation 'co.paystack.android:paystack:3.1.3'   
+diff --git a/node_modules/react-native-paystack/ios/RNPaystack.m b/node_modules/react-native-paystack/ios/RNPaystack.m
+index 0cba805..b19378e 100644
+--- a/node_modules/react-native-paystack/ios/RNPaystack.m
++++ b/node_modules/react-native-paystack/ios/RNPaystack.m
+@@ -130,7 +130,7 @@ - (BOOL)cardParamsAreValid:(NSString *)cardNumber withMonth:(NSString *)expMonth
+     requestIsCompleted = NO;
+     
+     if (! [self cardParamsAreValid:params[@"cardNumber"] withMonth:params[@"expiryMonth"] withYear:params[@"expiryYear"] andWithCvc:params[@"cvc"]]) {
+-
++requestIsCompleted = YES
+         // NSMutableDictionary *returnInfo = [self setErrorMsg:self.errorMsg withErrorCode:self.errorCode];
+         if (_reject) {
+             _reject(self.errorCode, self.errorMsg, nil);
+@@ -224,7 +224,7 @@ - (BOOL)cardParamsAreValid:(NSString *)cardNumber withMonth:(NSString *)expMonth
+     requestIsCompleted = NO;
+     
+     if (! [self cardParamsAreValid:params[@"cardNumber"] withMonth:params[@"expiryMonth"] withYear:params[@"expiryYear"] andWithCvc:params[@"cvc"]]) {
+-
++requestIsCompleted = YES
+         // NSMutableDictionary *returnInfo = [self setErrorMsg:self.errorMsg withErrorCode:self.errorCode];
+         if (_reject) {
+             _reject(self.errorCode, self.errorMsg, nil);

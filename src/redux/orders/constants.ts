@@ -1,0 +1,17 @@
+export const ORDER = 'order';
+export const GET_ALL_PAYMENT_METHODS_REQUEST = `${ORDER}/getAllPaymentMethods`;
+export const GET_INITIATE_PAYMENT = `${ORDER}/initiatePayment`;
+export const SETUP_PAYMENT_CHARGE = `${ORDER}/setupPaymentCharge`;
+export const SETUP_CHECKOUT = `${ORDER}/setupCheckout`;
+export const CLEAR_CHECKOUT = `${ORDER}/clearCheckout`;
+export const ADD_NEW_PAYMENT_METHOD = `${ORDER}/addNewPaymentMethod`;
+export const SETUP_PAYMENT_DEFAULT = `${ORDER}/setupPaymentDefault`;
+export const UPDATE_PAYMENT_METHOD = `${ORDER}/updatePaymentMethod`;
+export const CHECK_ORDER_PAID = `${ORDER}/checkOrderPaid`;
+export const PAYMENT_CALCULATED = `${ORDER}/paymentCalculated`;
+export const GET_ORDER_DETAILS = `${ORDER}/getOrderDetails`;
+export const SAVED_CARD_DETAILS = `${ORDER}/savedCardDetails`;
+export const CLEAR_ORDER_VERIFIED = `${ORDER}/clearOrderVerified`;
+export const CLEAR_ADD_NEW_CARD_DATA = `${ORDER}/clearAddNewCard`;
+export const GET_ALL_ORDERS = `${ORDER}/getAllOrders`;
+export const CANCEL_ORDER = `${ORDER}/cancelOrder`;

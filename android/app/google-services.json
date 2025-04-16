@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1032169490714",
+    "project_id": "samu-app-d576e",
+    "storage_bucket": "samu-app-d576e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032169490714:android:a4e65a529c5defc301c4a3",
+        "android_client_info": {
+          "package_name": "com.samuapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032169490714-0ccohtrbefc7lnbe264np68jb3m3o0gu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samuapp",
+            "certificate_hash": "7e6f0ad041d5c173f23ef03af63c473ca46b6ab3"
+          }
+        },
+        {
+          "client_id": "1032169490714-up0jvt7rrs2hari7ffain8a33m01kl09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ8bGUSndDZQN_JdEgrHTo2bxJ9aVtnIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032169490714-up0jvt7rrs2hari7ffain8a33m01kl09.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1032169490714-578foofea8ebsj12cc5p9krbs60ctv40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samuapp.test"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
