@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-avoid-softinput/ios/AvoidSoftinput-Bridging-Header.h

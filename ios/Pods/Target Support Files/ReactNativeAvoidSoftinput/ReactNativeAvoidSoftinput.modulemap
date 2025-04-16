@@ -1,0 +1,6 @@
+module ReactNativeAvoidSoftinput {
+  umbrella header "ReactNativeAvoidSoftinput-umbrella.h"
+
+  export *
+  module * { export * }
+}

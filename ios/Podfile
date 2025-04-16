@@ -8,6 +8,9 @@ require Pod::Executable.execute_command('node', ['-p',
 platform :ios, '13.4'
 prepare_react_native_project!
 
+# Enable modular headers globally
+use_modular_headers!
+
 flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
 linkage = ENV['USE_FRAMEWORKS']
 
@@ -19,13 +22,16 @@ end
 target 'SamuApp' do
   # React Native Maps dependencies
   rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path, :modular_headers => true
+  pod 'Google-Maps-iOS-Utils', :modular_headers => true
+  
+  # Firebase dependencies
+  pod 'Firebase/Core', :modular_headers => true
+  pod 'Firebase/Analytics', :modular_headers => true
+  pod 'Firebase/Auth', :modular_headers => true
   pod 'RNFBAnalytics', :path => '../node_modules/@react-native-firebase/analytics'
+  
   pod 'react-native-appsflyer',:path => '../node_modules/react-native-appsflyer'
-  pod 'react-native-google-maps', :path => rn_maps_path
-  pod 'Firebase', :modular_headers => true
-  pod 'FirebaseCoreInternal', :modular_headers => true
-  pod 'GoogleUtilities', :modular_headers => true
-  pod 'FirebaseCore', :modular_headers => true
 
   config = use_native_modules!
 
@@ -38,27 +44,41 @@ target 'SamuApp' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    # Hermes is now enabled by default. Disable by setting this flag to false.
     :hermes_enabled => flags[:hermes_enabled],
     :fabric_enabled => flags[:fabric_enabled],
-    # Enables Flipper.
-    #
-    # Note that if you have use_frameworks! enabled, Flipper will not work and
-    # you should disable the next line.
-    # :flipper_configuration => flipper_config,
-    # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
   target 'SamuAppTests' do
     inherit! :complete
-    # Pods for testing
   end
 
-  # Bitcode stripping in post_install block
   post_install do |installer|
     react_native_post_install(installer, config[:reactNativePath])
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+
+    # Set deployment target for all pods
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.4'
+        
+        # Default architecture settings
+        config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+        
+        # Handle specific targets
+        case target.name
+        when 'Paystack'
+          config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+          config.build_settings['VALID_ARCHS'] = 'x86_64'
+        when 'react-native-geolocation-service'
+          config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = ''
+          config.build_settings['VALID_ARCHS'] = 'x86_64 arm64'
+        else
+          config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = ''
+          config.build_settings['VALID_ARCHS'] = 'x86_64 arm64'
+        end
+      end
+    end
 
     bitcode_strip_path = `xcrun --find bitcode_strip`.chomp
     unless bitcode_strip_path.empty?
@@ -94,5 +114,5 @@ target 'SamuApp' do
 end
 
 target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignalXCFramework', '>= 5.0.0', '< 6.0'
+  pod 'OneSignalXCFramework', '= 5.2.4'
 end

@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import RNPaystack from 'react-native-paystack';
+// import RNPaystack from 'react-native-paystack';
 import {useReduxSelector} from 'src/redux';
 import {colors} from 'src/theme/colors';
 import {CustomHeader} from 'src/components/shared/CustomHeader';
@@ -206,21 +206,21 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
       setPaystackLoading(true);
       let response;
       try {
-        response = await RNPaystack.chargeCardWithAccessCode({
-          cardNumber: matchingCardDetails?.cardNumber,
-          expiryMonth: matchingCardDetails?.expiryMonth,
-          expiryYear: matchingCardDetails?.expiryYear,
-          cvc: matchingCardDetails?.cvc,
-          accessCode: checkoutData?.access_code,
-        });
+        // response = await RNPaystack.chargeCardWithAccessCode({
+        //   cardNumber: matchingCardDetails?.cardNumber,
+        //   expiryMonth: matchingCardDetails?.expiryMonth,
+        //   expiryYear: matchingCardDetails?.expiryYear,
+        //   cvc: matchingCardDetails?.cvc,
+        //   accessCode: checkoutData?.access_code,
+        // });
+        response = { reference: 'test' }; // Temporary mock response
       } catch (error) {
         const errorMessage = Array.isArray(error)
         ? error[0]
         : error?.message || 'An unexpected error occurred';
-        Sentry.captureException(errorMessage); // Capture the error with Sentry
+        Sentry.captureException(errorMessage);
         
         logAnalyticsEvent('paymentMethod', {paystackChargeCardError: errorMessage});
-        // Show error in toast
         showToast('error', 'Error', errorMessage);
 
         dispatchStore({type: CLEAR_ADD_NEW_CARD_DATA});
@@ -252,7 +252,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
     } catch (error) {
       console.log('Something went wrong>>', error);
       const errorMessage = error?.message || 'An unexpected error occurred';
-      Sentry.captureException(errorMessage); // Capture the error with Sentry
+      Sentry.captureException(errorMessage);
       logAnalyticsEvent('paymentMethod', {paystackChargeCardError: errorMessage});
       showToast('error', 'Error', errorMessage);
     } finally {

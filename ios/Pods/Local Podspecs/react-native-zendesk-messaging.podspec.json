@@ -1,0 +1,24 @@
+{
+  "name": "react-native-zendesk-messaging",
+  "version": "0.2.1",
+  "summary": "Zendesk messaging SDK for React Native",
+  "homepage": "https://github.com/leegeunhyeok/react-native-zendesk-messaging#readme",
+  "license": "MIT",
+  "authors": "leegeunhyeok <dev.ghlee@gmail.com> (https://github.com/leegeunhyeok)",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/leegeunhyeok/react-native-zendesk-messaging.git",
+    "tag": "0.2.1"
+  },
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "ZendeskSDKMessaging": [
+      "2.13.0"
+    ]
+  }
+}

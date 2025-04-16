@@ -1,0 +1,43 @@
+{
+  "name": "RNSentry",
+  "version": "6.10.0",
+  "license": "MIT",
+  "summary": "Official Sentry SDK for react-native",
+  "authors": "Sentry",
+  "homepage": "https://github.com/getsentry/sentry-react-native",
+  "source": {
+    "git": "https://github.com/getsentry/sentry-react-native.git",
+    "tag": "6.10.0"
+  },
+  "platforms": {
+    "ios": "11.0",
+    "osx": "10.13",
+    "tvos": "11.0",
+    "visionos": "1.0"
+  },
+  "preserve_paths": "*.js",
+  "source_files": "ios/**/*.{h,m,mm}",
+  "public_header_files": "ios/RNSentry.h",
+  "compiler_flags": "$(inherited) -DSENTRY_PROFILING_SUPPORTED=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32",
+  "dependencies": {
+    "Sentry/HybridSDK": [
+      "8.48.0"
+    ],
+    "React-Core": [
+
+    ],
+    "RCT-Folly": [
+      "2021.07.22.00"
+    ],
+    "React-hermes": [
+
+    ],
+    "hermes-engine": [
+
+    ]
+  },
+  "pod_target_xcconfig": {
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\"",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++17"
+  }
+}

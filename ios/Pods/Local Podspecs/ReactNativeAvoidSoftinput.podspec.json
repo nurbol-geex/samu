@@ -1,0 +1,31 @@
+{
+  "name": "ReactNativeAvoidSoftinput",
+  "version": "5.0.0",
+  "summary": "Native logic for avoiding covering  text inputs by soft input views",
+  "homepage": "https://github.com/mateusz1913/react-native-avoid-softinput#readme",
+  "license": "MIT",
+  "authors": "Mateusz Mędrek <luigimario1913@gmail.com> (https://github.com/mateusz1913)",
+  "platforms": {
+    "ios": "12.4"
+  },
+  "source": {
+    "git": "https://github.com/mateusz1913/react-native-avoid-softinput.git",
+    "tag": "5.0.0"
+  },
+  "source_files": "ios/**/*.{h,m,mm,cpp}",
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "SWIFT_OBJC_INTERFACE_HEADER_NAME": "ReactNativeAvoidSoftinput-Swift.h",
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\"",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++17"
+  },
+  "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32",
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "RCT-Folly": [
+      "2021.07.22.00"
+    ]
+  }
+}

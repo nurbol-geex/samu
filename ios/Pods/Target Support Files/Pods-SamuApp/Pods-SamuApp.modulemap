@@ -1,0 +1,6 @@
+module Pods_SamuApp {
+  umbrella header "Pods-SamuApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+module react_native_zendesk_messaging {
+  umbrella header "react-native-zendesk-messaging-umbrella.h"
+
+  export *
+  module * { export * }
+}

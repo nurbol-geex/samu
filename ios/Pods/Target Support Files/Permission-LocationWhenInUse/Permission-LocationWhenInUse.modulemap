@@ -1,0 +1,6 @@
+module Permission_LocationWhenInUse {
+  umbrella header "Permission-LocationWhenInUse-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,10 +7,10 @@
 
 import {
   SENTRY_DSN,
-  PAY_STACK_LIVE_KEY,
+  // PAY_STACK_LIVE_KEY,
   GOOGLE_WEB_CLIENT_ID_ANDROID,
   GOOGLE_WEB_CLIENT_ID_IOS,
-  PAY_STACK_TEST_KEY,
+  // PAY_STACK_TEST_KEY,
 } from '@env';
 import {NavigationContainer} from '@react-navigation/native';
 import * as Sentry from '@sentry/react-native';
@@ -25,15 +25,15 @@ import {navigationRef} from './routes/RootNavigation';
 import RootStack from './routes/RootStack';
 import {createCustomTheme} from './theme/createCustomTheme';
 import {LogLevel, OneSignal} from 'react-native-onesignal';
-import RNPaystack from 'react-native-paystack';
+// import RNPaystack from 'react-native-paystack';
 import RNBootSplash from 'react-native-bootsplash';
 import {injectParamsToURL, logAnalyticsEvent} from './utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import appsFlyer from 'react-native-appsflyer';
 
-RNPaystack.init({
-  publicKey: PAY_STACK_LIVE_KEY,
-});
+// RNPaystack.init({
+//   publicKey: PAY_STACK_LIVE_KEY,
+// });
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: true,
 });

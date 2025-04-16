@@ -1,0 +1,6 @@
+module Permission_LocationAlways {
+  umbrella header "Permission-LocationAlways-umbrella.h"
+
+  export *
+  module * { export * }
+}

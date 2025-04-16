@@ -5,6 +5,9 @@ PODS:
   - AppAuth/Core (1.7.6)
   - AppAuth/ExternalUserAgent (1.7.6):
     - AppAuth/Core
+  - AppsFlyerFramework (6.16.2):
+    - AppsFlyerFramework/Main (= 6.16.2)
+  - AppsFlyerFramework/Main (6.16.2)
   - boost (1.76.0)
   - BVLinearGradient (2.8.3):
     - React-Core
@@ -17,8 +20,6 @@ PODS:
     - React-Core (= 0.72.11)
     - React-jsi (= 0.72.11)
     - ReactCommon/turbomodule/core (= 0.72.11)
-  - Firebase (10.29.0):
-    - Firebase/Core (= 10.29.0)
   - Firebase/Analytics (10.29.0):
     - Firebase/Core
   - Firebase/Auth (10.29.0):
@@ -116,18 +117,6 @@ PODS:
     - AppAuth (< 2.0, >= 1.7.3)
     - GTMAppAuth (< 5.0, >= 4.1.1)
     - GTMSessionFetcher/Core (~> 3.3)
-  - GoogleUtilities (7.13.3):
-    - GoogleUtilities/AppDelegateSwizzler (= 7.13.3)
-    - GoogleUtilities/Environment (= 7.13.3)
-    - GoogleUtilities/ISASwizzler (= 7.13.3)
-    - GoogleUtilities/Logger (= 7.13.3)
-    - GoogleUtilities/MethodSwizzler (= 7.13.3)
-    - GoogleUtilities/Network (= 7.13.3)
-    - "GoogleUtilities/NSData+zlib (= 7.13.3)"
-    - GoogleUtilities/Privacy (= 7.13.3)
-    - GoogleUtilities/Reachability (= 7.13.3)
-    - GoogleUtilities/SwizzlerTestHelpers (= 7.13.3)
-    - GoogleUtilities/UserDefaults (= 7.13.3)
   - GoogleUtilities/AppDelegateSwizzler (7.13.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -136,8 +125,6 @@ PODS:
   - GoogleUtilities/Environment (7.13.3):
     - GoogleUtilities/Privacy
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/ISASwizzler (7.13.3):
-    - GoogleUtilities/Privacy
   - GoogleUtilities/Logger (7.13.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
@@ -155,8 +142,6 @@ PODS:
   - GoogleUtilities/Reachability (7.13.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleUtilities/SwizzlerTestHelpers (7.13.3):
-    - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.13.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
@@ -168,9 +153,9 @@ PODS:
     - hermes-engine/Pre-built (= 0.72.11)
   - hermes-engine/Pre-built (0.72.11)
   - libevent (2.1.12)
-  - MMKV (2.0.2):
-    - MMKVCore (~> 2.0.2)
-  - MMKVCore (2.0.2)
+  - MMKV (2.1.0):
+    - MMKVCore (~> 2.1.0)
+  - MMKVCore (2.1.1)
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -222,9 +207,6 @@ PODS:
     - OneSignalXCFramework/OneSignalNotifications
     - OneSignalXCFramework/OneSignalOSCore
     - OneSignalXCFramework/OneSignalOutcomes
-  - Paystack (3.0.17):
-    - Paystack/Core (= 3.0.17)
-  - Paystack/Core (3.0.17)
   - Permission-LocationAlways (3.10.0):
     - RNPermissions
   - Permission-LocationWhenInUse (3.10.0):
@@ -530,6 +512,9 @@ PODS:
   - React-jsinspector (0.72.11)
   - React-logger (0.72.11):
     - glog
+  - react-native-appsflyer (6.16.2):
+    - AppsFlyerFramework (= 6.16.2)
+    - React
   - react-native-date-picker (5.0.7):
     - React-Core
   - react-native-geolocation (3.2.0):
@@ -555,11 +540,6 @@ PODS:
   - react-native-pager-view (6.2.3):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - react-native-paystack (3.4.0):
-    - Paystack
-    - React
-  - react-native-paystack-webview (4.0.4):
-    - React
   - react-native-safe-area-context (4.9.0):
     - React-Core
   - react-native-webview (13.10.0):
@@ -688,7 +668,9 @@ PODS:
     - React-Core
   - RNBootSplash (6.1.3):
     - React-Core
-  - RNCClipboard (1.14.1):
+  - RNCAsyncStorage (2.1.2):
+    - React-Core
+  - RNCClipboard (1.16.2):
     - React-Core
   - RNCMaskedView (0.3.1):
     - React-Core
@@ -698,11 +680,11 @@ PODS:
     - Firebase/Analytics (= 10.29.0)
     - React-Core
     - RNFBApp
-  - RNFBApp (21.2.0):
-    - Firebase/CoreOnly (<= 10.29.0)
+  - RNFBApp (21.0.0):
+    - Firebase/CoreOnly (= 10.29.0)
     - React-Core
-  - RNFBAuth (21.2.0):
-    - Firebase/Auth (<= 10.29.0)
+  - RNFBAuth (21.0.0):
+    - Firebase/Auth (= 10.29.0)
     - React-Core
     - RNFBApp
   - RNGoogleSignin (13.1.0):
@@ -715,12 +697,12 @@ PODS:
   - RNScreens (3.29.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNSentry (6.3.0):
+  - RNSentry (6.10.0):
     - hermes-engine
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-hermes
-    - Sentry/HybridSDK (= 8.41.0)
+    - Sentry/HybridSDK (= 8.48.0)
   - RNShare (10.2.1):
     - React-Core
   - RNSVG (15.1.0):
@@ -728,7 +710,7 @@ PODS:
   - RNVectorIcons (10.0.3):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - Sentry/HybridSDK (8.41.0)
+  - Sentry/HybridSDK (8.48.0)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
   - Zendesk (1.13.0):
@@ -763,14 +745,14 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
-  - Firebase
-  - FirebaseCore
-  - FirebaseCoreInternal
+  - Firebase/Analytics
+  - Firebase/Auth
+  - Firebase/Core
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - GoogleUtilities
+  - Google-Maps-iOS-Utils
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
-  - OneSignalXCFramework (< 6.0, >= 5.0.0)
+  - OneSignalXCFramework (= 5.2.4)
   - Permission-LocationAlways (from `../node_modules/react-native-permissions/ios/LocationAlways/Permission-LocationAlways.podspec`)
   - Permission-LocationWhenInUse (from `../node_modules/react-native-permissions/ios/LocationWhenInUse/Permission-LocationWhenInUse.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -789,6 +771,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-appsflyer (from `../node_modules/react-native-appsflyer`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
@@ -798,8 +781,6 @@ DEPENDENCIES:
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
-  - react-native-paystack (from `../node_modules/react-native-paystack`)
-  - react-native-paystack-webview (from `../node_modules/react-native-paystack-webview`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - react-native-zendesk-messaging (from `../node_modules/react-native-zendesk-messaging`)
@@ -824,6 +805,7 @@ DEPENDENCIES:
   - ReactNativeGetLocation (from `../node_modules/react-native-get-location`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
@@ -843,6 +825,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
+    - AppsFlyerFramework
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
@@ -863,7 +846,6 @@ SPEC REPOS:
     - MMKVCore
     - nanopb
     - OneSignalXCFramework
-    - Paystack
     - PromisesObjC
     - RecaptchaInterop
     - Sentry
@@ -928,6 +910,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-appsflyer:
+    :path: "../node_modules/react-native-appsflyer"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
   react-native-geolocation:
@@ -946,10 +930,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-onesignal"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
-  react-native-paystack:
-    :path: "../node_modules/react-native-paystack"
-  react-native-paystack-webview:
-    :path: "../node_modules/react-native-paystack-webview"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
@@ -998,6 +978,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCClipboard:
     :path: "../node_modules/@react-native-clipboard/clipboard"
   RNCMaskedView:
@@ -1031,6 +1013,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
+  AppsFlyerFramework: fe5303bffcdfd941d5f570c2d21eaaea982e7bdc
   boost: 7dcd2de282d72e344012f7d6564d024930a6a440
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -1054,11 +1037,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   hermes-engine: c22b4cc0bb1d1603b9e4faf83732be227baa55bc
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  MMKV: 3eacda84cd1c4fc95cf848d3ecb69d85ed56006c
-  MMKVCore: 508b4d3a8ce031f1b5c8bd235f0517fb3f4c73a9
+  MMKV: ce484c1ac40bf76d5f09a0195d2ec5b3d3840d55
+  MMKVCore: 1eb661c6c498ab88e3df9ce5d8ff94d05fcc0567
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   OneSignalXCFramework: 46ca7cd13f44fc5bec42ec3a5f4ff1548a9244d4
-  Paystack: 5a7a9d5c47ddfd76e3d84550d9ff1f49bf6d284c
   Permission-LocationAlways: ea58f2c4e0fb619662f7346daba2fc5c40448676
   Permission-LocationWhenInUse: 1ecad1bbfcd5989d2e51577c7172f51498966456
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
@@ -1077,6 +1059,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 13401c2c6ddc727c74b71eb58b7590332d27d4eb
   React-jsinspector: a70e8fc7f3ae7982db27e7c114c0ec8c0714c8f5
   React-logger: 9fd8d34baa7930b42a70669ec0f0971083ae5a7b
+  react-native-appsflyer: d52a08a5e687e4c2aca78519b0e258e1a82fad0a
   react-native-date-picker: 06a4d96ab525a163c7a90bccd68833d136b0bb13
   react-native-geolocation: 2c23f31c64c10030a5adc26360638a53d2d96112
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
@@ -1086,8 +1069,6 @@ SPEC CHECKSUMS:
   react-native-netinfo: bdb108d340cdb41875c9ced535977cac6d2ff321
   react-native-onesignal: b2ccb145f06433f23c834be17a5f6522308e80f0
   react-native-pager-view: e26d35e382d86950c936f8917e3beb9188115ccc
-  react-native-paystack: 90e74a1b5ff17bb4d9bd1cc35f0ff2d5ad442f87
-  react-native-paystack-webview: bc5e2a352a71e95735b7c297d1115ecc998fccd8
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   react-native-webview: 90153193e679163ec257011fa457d02765120210
   react-native-zendesk-messaging: e4418f96cb02c6741cce7059972f01312eac8e0f
@@ -1113,21 +1094,22 @@ SPEC CHECKSUMS:
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   RNAppleAuthentication: e00c76acb03351f5544373c78fa7f359bef6d5d3
   RNBootSplash: 0177d81b7c094bbb9d7af80e77f8694922dae46d
-  RNCClipboard: 0a720adef5ec193aa0e3de24c3977222c7e52a37
+  RNCAsyncStorage: addfc2cb6511dbe199c56c6b26ede383b6c38919
+  RNCClipboard: 4411a880506f11fbcbdc03b5093eb8ffb246d900
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNDeviceInfo: 4f9c7cfd6b9db1b05eb919620a001cf35b536423
   RNFBAnalytics: 43d575ae2578ed904ddb2ce9d6a519919a10197c
-  RNFBApp: 077c3ec204a4af215d57ac24c43f79f06ab066e3
-  RNFBAuth: c35f088a72356655cd18fe0c6353e6d960bc3d36
+  RNFBApp: c8ae673f55099ef521e702eae8e1604ea75524d4
+  RNFBAuth: 6af951f0e2d3f64968cd3e74c7a81a31b09a5971
   RNGoogleSignin: 9e68b9bcc3888219357924e32ee563624745647d
   RNKeychain: bfe3d12bf4620fe488771c414530bf16e88f3678
   RNPermissions: 3acba750d9146af1c33a79c013e02f8b48067acc
   RNScreens: 3c5b9f4a9dcde752466854b6109b79c0e205dad3
-  RNSentry: f82cb18e008c024a5373a09d3696be7a58136182
+  RNSentry: 22541a7ab6462945687ac99e0a96151c9ee262bc
   RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
   RNSVG: 50cf2c7018e57cf5d3522d98d0a3a4dd6bf9d093
   RNVectorIcons: 64e6a523ac30a3241efa9baf1ffbcc5e76ff747a
-  Sentry: 54d0fe6c0df448497c8ed4cce66ccf7027e1823e
+  Sentry: 1ca8405451040482877dcd344dfa3ef80b646631
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 76b2d5677fc9694bae53c80d0cccfc55719064a3
   Zendesk: 5e382df2c0034a0df4e43174ecbd7e9bed54b929
@@ -1141,6 +1123,6 @@ SPEC CHECKSUMS:
   ZendeskSDKStorage: 00d6f78a39a42b71c3730b1c39cc0a5c12690685
   ZendeskSDKUIComponents: 59fab9ac52f3ac5ef3136188da8dc38b06d100f7
 
-PODFILE CHECKSUM: 3ea99e4e27f8e60e2112375d292002b29acecd55
+PODFILE CHECKSUM: 1684df54b5628f22b29c0a5eb2e40d3f8da8e72a
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
