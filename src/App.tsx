@@ -27,7 +27,7 @@ import {createCustomTheme} from './theme/createCustomTheme';
 import {LogLevel, OneSignal} from 'react-native-onesignal';
 // import RNPaystack from 'react-native-paystack';
 import RNBootSplash from 'react-native-bootsplash';
-import {injectParamsToURL, logAnalyticsEvent} from './utils';
+import {injectParamsToURL } from './utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import appsFlyer from 'react-native-appsflyer';
 import {initSegment} from './segmentService';

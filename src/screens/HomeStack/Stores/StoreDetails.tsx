@@ -47,10 +47,11 @@ import SearchBar from 'src/components/shared/CustomSearch';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {CustomTouchableSVG} from 'src/components/shared/CustomTouchableSVG';
 import CrossSVG from 'assets/svg/CrossSVG';
-import {logAnalyticsEvent, transformDataToSections} from 'src/utils';
+import {transformDataToSections} from 'src/utils';
 import DeviceInfo from 'react-native-device-info';
 import {ANALYTICS} from 'src/redux/user/constants';
 import {selectCurrentCartItem} from 'src/redux/cart/selectors';
+import { useAnalytics } from 'src/segmentService';
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({route}) => {
   const dispatchStore = useDispatch();
@@ -59,7 +60,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({route}) => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const user = useReduxSelector(state => state.user);
-
+  const { track } = useAnalytics();
   const {
     user: {accessToken, isGuest, lat, lng},
   } = useReduxSelector(store => ({user: store.user}));
@@ -71,7 +72,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({route}) => {
   } = useSelector((state: RootState) => state.addresses);
 
   const onSearchAnalytics = storeId => {
-    logAnalyticsEvent('Store', {storeId});
+    track('Store', {storeId});
     dispatchStore({
       type: ANALYTICS,
       payload: {

@@ -63,7 +63,6 @@ import {
   appsFlyerTrackEvent,
   formatPrice,
   keyMappings,
-  logAnalyticsEvent,
 } from 'src/utils';
 import MapView from 'src/components/pageSections/MapView.tsx/MapView';
 import {Route} from 'src/routes/Route';
@@ -87,6 +86,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {ANALYTICS} from 'src/redux/user/constants';
 import {CustomModal} from 'src/components/shared/CustomModal';
 import Clipboard from '@react-native-clipboard/clipboard';
+import { useAnalytics } from 'src/segmentService';
 
 const additionalPaymentMethods = [
   // {
@@ -150,7 +150,7 @@ const BasketScreen: FC = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
     string | null
   >(null);
-
+  const { track } = useAnalytics();
   const [summaryPrices, setSummaryPrices] = useState<any>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState({});
@@ -240,7 +240,7 @@ const BasketScreen: FC = () => {
     // Check if cart has items
     if (currentCartItem && currentCartItem.length > 0) {
       // Start analytics event
-      logAnalyticsEvent('checkoutStarted', {orderData});
+      track('checkoutStarted', {orderData});
       dispatchStore({
         type: ANALYTICS,
         payload: {
@@ -270,7 +270,7 @@ const BasketScreen: FC = () => {
         type: SETUP_CHECKOUT,
         payload: orderData,
       });
-      logAnalyticsEvent('checkoutStarted', {orderData});
+      track('checkoutStarted', {orderData});
       return;
     }
     appsFlyerTrackEvent('af_purchase', {
@@ -279,7 +279,7 @@ const BasketScreen: FC = () => {
       af_order_id: orderData.cartId,
     });
     if (!currentCartItem[0]?.cartId) {
-      logAnalyticsEvent('checkoutFailed', {reason: 'No cart ID'});
+      track('checkoutFailed', {reason: 'No cart ID'});
       dispatchStore({
         type: ANALYTICS,
         payload: {
@@ -295,7 +295,7 @@ const BasketScreen: FC = () => {
     }
 
     if (!defaultPaymentMethod) {
-      logAnalyticsEvent('checkoutFailed', {
+      track('checkoutFailed', {
         reason: 'No default payment method',
       });
       dispatchStore({
@@ -313,7 +313,7 @@ const BasketScreen: FC = () => {
       return;
     }
 
-    logAnalyticsEvent('checkoutCompleted', {orderData});
+    track('checkoutCompleted', {orderData});
     dispatchStore({
       type: ANALYTICS,
       payload: {

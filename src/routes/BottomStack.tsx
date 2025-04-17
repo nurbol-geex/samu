@@ -45,10 +45,11 @@ import Faqs from 'src/screens/AccountStack/HelpFlowScreens/FaqsScreen/Faqs';
 import ChooseIssue from 'src/screens/AccountStack/HelpFlowScreens/ChooseIssueScreen/ChooseIssue';
 import SubmitIssue from 'src/screens/AccountStack/HelpFlowScreens/SubmitIssueScreen/SubmitIssue';
 import {getBaseUrlFromEmail} from 'src/utils/SetENV';
-import {logAnalyticsEvent} from 'src/utils';
 import {pageOpened} from 'src/api/analyticsAPI';
 import {ANALYTICS, LOGOUT} from 'src/redux/user/constants';
 import Toast from 'react-native-toast-message';
+import { useAnalytics } from 'src/segmentService';
+
 
 export type BottomStackParamList = {};
 
@@ -223,13 +224,16 @@ export default function BottomStack() {
     user: {accessToken, isGuest},
   } = useReduxSelector(store => ({user: store.user}));
   getBaseUrlFromEmail(user?.email);
-
+  const { track } = useAnalytics()
   return (
     <Stack.Navigator
       screenListeners={({navigation, route}) => ({
         focus: () => {
           const pageName = getActiveRouteName(navigation.getState());
-          logAnalyticsEvent('Screen_Changed', {screen_name: pageName});
+
+          // NEW ANALYTICS START
+          track("Screen_Changed", { screen_name: pageName })
+
           if (!user.accessToken && !isGuest) {
             dispatchStore({
               type: ANALYTICS,

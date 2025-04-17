@@ -1,0 +1,80 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# macOS
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Editor
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Metro / React Native cache
+.expo/
+.expo-shared/
+*.expo
+*.expo.*
+*.expo-shared
+.expo-shared/
+
+# Babel
+.babelrc
+.babelrc.js
+babel.config.js
+
+# Android
+android/.gradle/
+android/app/build/
+android/.idea/
+android/.cxx/
+android/.externalNativeBuild/
+android/local.properties
+
+# iOS
+ios/
+ios/Pods/
+ios/build/
+ios/.idea/
+ios/.xcodeproj/
+ios/.xcworkspace/
+ios/*.xcworkspace/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+
+# Prettier and ESLint
+.prettiercache
+
+# OS
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Bundle output
+dist/
+build/
+*.jsbundle
+*.hmap
+*.ipa
+
+# Misc
+.env
+.env.*
+*.keystore
+*.p8
+*.p12
+*.key
+*.mobileprovision
+

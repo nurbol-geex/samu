@@ -25,11 +25,10 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {heightPercentageScale} from 'src/theme/dimensions';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {fontFamilies} from 'src/theme/textVariants';
-import {logAnalyticsEvent} from 'src/utils';
-import {analytics} from 'src/utils';
 import Feather from 'react-native-vector-icons/Feather';
 import {CustomTouchableSVG} from 'src/components/shared/CustomTouchableSVG';
 import {NEW_GOOGLE_MAPS_API_KEY} from "@env"
+import { useAnalytics } from 'src/segmentService';
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
@@ -129,6 +128,8 @@ export default function AddressScreen() {
   const route = useRoute<AuthStackRouteProps<Route.AddressScreen>>();
   const {createFromAccount, deliveryAddress} = route.params;
   console.log('createFromAccount: ', createFromAccount);
+  
+  const { track } = useAnalytics(); 
 
   const [locationInputFocused, setlocationInputFocused] = useState(false);
   const {
@@ -239,9 +240,10 @@ export default function AddressScreen() {
         setError: setError,
       }),
     );
-    logAnalyticsEvent('Address_added', {
-      addressParams,
-    });
+
+    // NEW ANALYTICS START
+    track("Address added", { addressParams });
+
   };
 
   // useEffect(() => {

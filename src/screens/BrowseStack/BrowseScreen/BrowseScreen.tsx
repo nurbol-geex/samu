@@ -38,10 +38,11 @@ import {CustomSkeletonLoader} from 'src/components/shared/CustomSkeletonLoader';
 import {FilterTabsBoard} from 'src/components/pageSections/FilterTabsBoard';
 import {scale, vs} from 'react-native-size-matters';
 import {ANALYTICS} from 'src/redux/user/constants';
-import {appsFlyerTrackEvent, logAnalyticsEvent} from 'src/utils';
+import {appsFlyerTrackEvent } from 'src/utils';
 import {Route} from 'src/routes/Route';
 import {useNavigation} from '@react-navigation/native';
 import CategoryTabs from 'src/components/pageSections/FilterTabsBoard/CategoryTabs';
+import { useAnalytics } from 'src/segmentService';
 
 const styles = StyleSheet.create<Styles>({
   container: {
@@ -112,7 +113,7 @@ export default function BrowseScreen({section}) {
   const [searchingEnabled, setSearchingEnabled] = useState(false);
   const [selectedTabData, setSelectedTabData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-
+  const { track } = useAnalytics()
   const homeSections = useReduxSelector(selectHomeSections);
   const homeSectionsLoading = useReduxSelector(selectHomeSectionsIsLoading);
   const isProductSearchDataLoad = useReduxSelector(
@@ -188,7 +189,7 @@ export default function BrowseScreen({section}) {
 
   const onSearchAnalytics = searchKey => {
    
-      logAnalyticsEvent('Searched', {searchKey});
+      track('Searched', {searchKey});
       dispatchStore({
         type: ANALYTICS,
         payload: {
@@ -240,7 +241,7 @@ export default function BrowseScreen({section}) {
             storeName: item.name,
             storeId: item._id,
           };
-          logAnalyticsEvent('searchResult', {...eventData});
+          track('Search Result', {...eventData});
 
           dispatchStore({
             type: ANALYTICS,

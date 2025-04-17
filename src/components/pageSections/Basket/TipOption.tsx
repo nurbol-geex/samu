@@ -5,23 +5,24 @@ import {colors} from 'src/theme/colors';
 import {moderateScale, scale, vs} from 'react-native-size-matters';
 import {CustomTouchableSVG} from 'src/components/shared/CustomTouchableSVG';
 import {tips} from 'src/mocks/general';
-import {formatPrice, logAnalyticsEvent} from 'src/utils';
+import {formatPrice } from 'src/utils';
 import {useReduxSelector} from 'src/redux';
 import {useDispatch} from 'react-redux';
 import {ANALYTICS} from 'src/redux/user/constants';
+import { useAnalytics } from 'src/segmentService';
 
 const TipOption: React.FC<TipOptionProps> = React.memo(
   ({setTipModalVisible, setSelectTip, selectTip}) => {
     const isTipInList = tips.some(tip => tip.price === selectTip);
     const user = useReduxSelector(state => state.user);
-
+    const { track } = useAnalytics()
     const {
       user: {accessToken, isGuest},
     } = useReduxSelector(store => ({user: store.user}));
     const dispatchStore = useDispatch();
 
     const sendtipAnalytics = () => {
-      logAnalyticsEvent('tipAdded', {selectTip});
+      track('tipAdded', {selectTip});
       dispatchStore({
         type: ANALYTICS,
         payload: {

@@ -38,12 +38,13 @@ import {CustomModal} from 'src/components/shared/CustomModal';
 import {CustomText} from 'src/components/shared/CustomText';
 import DeviceInfo from 'react-native-device-info';
 import {showToast} from 'src/components/shared/CustomToast/toastUtils';
-import {appsFlyerTrackEvent, logAnalyticsEvent} from 'src/utils';
+import {appsFlyerTrackEvent } from 'src/utils';
 import {ANALYTICS, LOGOUT} from 'src/redux/user/constants';
 import {widthPercentageScale} from 'src/theme/dimensions';
 import {setCreateAccountForm} from 'src/redux/user/slice';
 import Toast from 'react-native-toast-message';
 import appsFlyer from 'react-native-appsflyer';
+import { useAnalytics } from 'src/segmentService';
 
 const ProductDetails: FC<ProductDetailsProps> = ({route}) => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -80,8 +81,10 @@ const ProductDetails: FC<ProductDetailsProps> = ({route}) => {
 
   const {primaryAddress} = useSelector((state: RootState) => state.addresses);
 
+  const { track } = useAnalytics()
+
   const onSearchAnalytics = productId => {
-    logAnalyticsEvent('addingToCart', {productId: route?.params?.productId});
+    track('addingToCart', {productId: route?.params?.productId});
     dispatch({
       type: ANALYTICS,
       payload: {
@@ -203,7 +206,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({route}) => {
   );
   const handleAddToCart = useCallback(
     (count: number) => {
-      logAnalyticsEvent('productId', {productId: route?.params?.productId});
+      track('productId', {productId: route?.params?.productId});
       dispatch({
         type: ANALYTICS,
         payload: {

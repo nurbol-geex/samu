@@ -11,7 +11,7 @@ import {colors} from 'src/theme/colors';
 import {CustomTouchableSVG} from 'src/components/shared/CustomTouchableSVG';
 import PlusSVG from 'assets/svg/PlusSVG';
 import {Route} from 'src/routes/Route';
-import {appsFlyerTrackEvent, formatPrice, logAnalyticsEvent} from 'src/utils';
+import {appsFlyerTrackEvent, formatPrice } from 'src/utils';
 import {useDispatch} from 'react-redux';
 import {
   CLEAR_CART_REQUEST,
@@ -30,6 +30,8 @@ import {ANALYTICS, LOGOUT} from 'src/redux/user/constants';
 import {widthPercentageScale} from 'src/theme/dimensions';
 import {setCreateAccountForm} from 'src/redux/user/slice';
 import Toast from 'react-native-toast-message';
+import { useAnalytics } from 'src/segmentService';
+import { current } from '@reduxjs/toolkit';
 
 const StoreProducts: React.FC<StoreProductsProps> = ({
   item,
@@ -61,6 +63,8 @@ const StoreProducts: React.FC<StoreProductsProps> = ({
   );
 
   const timerRef: React.MutableRefObject<null | any> = useRef(null);
+
+  const { track } = useAnalytics()
 
   useEffect(() => {
     if (showCustomCount) {
@@ -238,7 +242,8 @@ const StoreProducts: React.FC<StoreProductsProps> = ({
   );
 
   const handleIncrease = useCallback(() => {
-    logAnalyticsEvent('added_to_cart', {productId: currentId});
+    // NEW ANALYTICS START
+    track("Added to card", { productId: currentId })
 
     dispatchStore({
       type: ANALYTICS,
@@ -336,7 +341,7 @@ const StoreProducts: React.FC<StoreProductsProps> = ({
             setShowCustomCount(true);
             if (!isGuest || user.email === '' || !user.email) {
               // Logging analytics event
-              logAnalyticsEvent('added_to_cart', {productId: currentId});
+              track('Added to cart', {productId: currentId});
 
               // Dispatching analytics action
 

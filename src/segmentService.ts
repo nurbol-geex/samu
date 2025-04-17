@@ -35,6 +35,7 @@ export const getSegmentClient = () => {
 export const useAnalytics = () => {
   const track = async (event: string, properties?: Record<string, any>) => {
     try {
+      await initSegment();
       const client = getSegmentClient();
       if (client) {
         await client.track(event, properties);

@@ -11,11 +11,12 @@ import {
   PRODUCT_UPDATE_CART_REQUEST,
 } from 'src/redux/cart/constants';
 import {useDispatch} from 'react-redux';
-import {formatPrice, logAnalyticsEvent} from 'src/utils';
+import {formatPrice } from 'src/utils';
 import {useNavigation} from '@react-navigation/native';
 import {Route} from 'src/routes/Route';
 import { useReduxSelector } from 'src/redux';
 import { ANALYTICS } from 'src/redux/user/constants';
+import { useAnalytics } from 'src/segmentService';
 
 const BasketCard: React.FC<BasketCardProps> = ({item, isBorderLess = true}) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const BasketCard: React.FC<BasketCardProps> = ({item, isBorderLess = true}) => {
   const {
     user: {accessToken, isGuest},
   } = useReduxSelector(store => ({user: store.user}));
- 
+  const { track } = useAnalytics()
   const handleRemoveFromCart = useCallback(() => {
     dispatch({
       type: SAVE_LOCAL_CART,
@@ -102,7 +103,7 @@ const BasketCard: React.FC<BasketCardProps> = ({item, isBorderLess = true}) => {
 
   const handleIncrease = useCallback(() => {
 
-    logAnalyticsEvent('added_to_cart', {productId: item?.productId,});
+    track('Added to cart', {productId: item?.productId,});
     dispatch({
       type: ANALYTICS,
       payload: {

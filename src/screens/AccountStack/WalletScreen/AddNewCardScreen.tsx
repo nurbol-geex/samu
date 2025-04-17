@@ -37,7 +37,6 @@ import {
   extractLastName,
   formatCardNumber,
   formatExpiryDate,
-  logAnalyticsEvent,
   validateFields,
 } from 'src/utils/index';
 import {
@@ -56,6 +55,7 @@ import {CardDetails} from 'src/redux/orders/initialState';
 import {showToast} from 'src/components/shared/CustomToast/toastUtils';
 import {ANALYTICS} from 'src/redux/user/constants';
 import * as Sentry from '@sentry/react-native'; // Import Sentry
+import { useAnalytics } from 'src/segmentService';
 
 const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
   route,
@@ -96,9 +96,11 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
     user: {accessToken, isGuest, email},
   } = useReduxSelector(store => ({user: store.user}));
   const user = useReduxSelector(state => state.user);
+  const { track } = useAnalytics()
+
   const onSearchAnalytics = () => {
     if (Object.keys(addNewCardData).length) {
-      logAnalyticsEvent('beginAddingPaymentMethod', {addNewCardData});
+      track('Begin Adding Payment Method', {addNewCardData});
       dispatchStore({
         type: ANALYTICS,
         payload: {
@@ -159,7 +161,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
 
     const validationErrors = validateFields(newCardFields);
     if (Object.keys(validationErrors).length > 0) {
-      logAnalyticsEvent('paymentMethodError', {validationError: true});
+      track('paymentMethodError', {validationError: true});
       setErrors(validationErrors);
       return;
     }
@@ -220,7 +222,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
         : error?.message || 'An unexpected error occurred';
         Sentry.captureException(errorMessage);
         
-        logAnalyticsEvent('paymentMethod', {paystackChargeCardError: errorMessage});
+        track('paymentMethod', {paystackChargeCardError: errorMessage});
         showToast('error', 'Error', errorMessage);
 
         dispatchStore({type: CLEAR_ADD_NEW_CARD_DATA});
@@ -229,7 +231,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
       }
 
       if (response?.reference) {
-        logAnalyticsEvent('paymentMethod', {paystackChargeCard: 'Success'});
+        track('paymentMethod', {paystackChargeCard: 'Success'});
         dispatchStore({
           type: ANALYTICS,
           payload: {
@@ -253,7 +255,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
       console.log('Something went wrong>>', error);
       const errorMessage = error?.message || 'An unexpected error occurred';
       Sentry.captureException(errorMessage);
-      logAnalyticsEvent('paymentMethod', {paystackChargeCardError: errorMessage});
+      track('paymentMethod', {paystackChargeCardError: errorMessage});
       showToast('error', 'Error', errorMessage);
     } finally {
       setPaystackLoading(false);
@@ -268,7 +270,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
 
   useEffect(() => {
     if (orderVerifiedData?.message === 'Order is paid successfully.') {
-      logAnalyticsEvent('paymentMethod', {verifyOrderPayment: 'Success'});
+      track('paymentMethod', {verifyOrderPayment: 'Success'});
 
       setNewCardFields({
         name: '',
@@ -284,7 +286,7 @@ const AddNewCardScreen: React.FC<AddNewCardScreenProps> = ({
   useEffect(() => {
     const executePaymentFlow = () => {
       if (matchingCardDetails) {
-        logAnalyticsEvent('paymentMethod', {initiatingPaystack: 'Success'});
+        track('paymentMethod', {initiatingPaystack: 'Success'});
         handlePaystack();
       } else {
         console.log('Waiting for user to add card details...');

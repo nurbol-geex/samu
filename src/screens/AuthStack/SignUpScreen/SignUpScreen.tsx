@@ -1,9 +1,9 @@
-import {yupResolver} from '@hookform/resolvers/yup';
-import {useNavigation} from '@react-navigation/native';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigation } from '@react-navigation/native';
 import AppleButtonSVG from 'assets/svg/AppleButtonSVG';
 import GoogleButtonSVG from 'assets/svg/GoogleButtonSVG';
-import React, {useCallback, useEffect, useState} from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -12,39 +12,39 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {moderateScale, scale, vs} from 'react-native-size-matters';
-import {useDispatch, useSelector} from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { moderateScale, scale, vs } from 'react-native-size-matters';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
-import {testIDs} from '../../../assets/testIDs';
-import {CustomButton} from '../../../components/shared/CustomButton';
-import {CustomHeader} from '../../../components/shared/CustomHeader';
-import {CustomTextInput} from '../../../components/shared/CustomInputText';
-import {CustomLink} from '../../../components/shared/CustomLink';
-import {CustomText} from '../../../components/shared/CustomText';
-import {CustomTouchableSVG} from '../../../components/shared/CustomTouchableSVG';
+import { testIDs } from '../../../assets/testIDs';
+import { CustomButton } from '../../../components/shared/CustomButton';
+import { CustomHeader } from '../../../components/shared/CustomHeader';
+import { CustomTextInput } from '../../../components/shared/CustomInputText';
+import { CustomLink } from '../../../components/shared/CustomLink';
+import { CustomText } from '../../../components/shared/CustomText';
+import { CustomTouchableSVG } from '../../../components/shared/CustomTouchableSVG';
 import {
   selectCreateAccountForm,
   selectUpdateProfileIsLoading,
 } from '../../../redux/user/selectors';
-import {setCreateAccountForm} from '../../../redux/user/slice';
-import {AuthStackNavigation} from '../../../routes/AuthStack';
+import { setCreateAccountForm } from '../../../redux/user/slice';
+import { AuthStackNavigation } from '../../../routes/AuthStack';
 import {
   accountSetUpScreenPushAction,
   loginScreenPushAction,
 } from '../../../routes/navigationActionCreators';
-import {colors} from '../../../theme/colors';
-import {useReduxSelector} from 'src/redux';
+import { colors } from '../../../theme/colors';
+import { useReduxSelector } from 'src/redux';
 import axios from 'axios';
-import {Route} from 'src/routes/Route';
-import {widthPercentageScale} from 'src/theme/dimensions';
+import { Route } from 'src/routes/Route';
+import { widthPercentageScale } from 'src/theme/dimensions';
 // import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {getBaseUrlFromEmail, getBaseUrlFromStorage} from 'src/utils/SetENV';
-import {showToast} from 'src/components/shared/CustomToast/toastUtils';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {appleAuth} from '@invertase/react-native-apple-authentication';
+import { getBaseUrlFromEmail, getBaseUrlFromStorage } from 'src/utils/SetENV';
+import { showToast } from 'src/components/shared/CustomToast/toastUtils';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import auth from '@react-native-firebase/auth';
-import {GUEST_LOGIN, SOCIAL_AUTH} from 'src/redux/user/constants';
+import { GUEST_LOGIN, SOCIAL_AUTH } from 'src/redux/user/constants';
 import { storage } from 'src/redux/MMKVStorage';
 import useGuestLocation from 'src/utils/hooks/useGuestLocation';
 import DeviceInfo from 'react-native-device-info';
@@ -132,12 +132,12 @@ export default function SignUpScreen() {
   const updateProfileLoading = useReduxSelector(selectUpdateProfileIsLoading);
   const [isloading, setIsLoading] = useState(false);
   const [isloadings, setIsLoadings] = useState(false);
-  const {email, phone} = useSelector(selectCreateAccountForm);
+  const { email, phone } = useSelector(selectCreateAccountForm);
   const isOnboard = useReduxSelector(store => store.settings.isOnBoard);
   const [isloadingGoogle, setIsloadingGoogle] = useState(false);
-const[deviceId,setDeviceId]=useState()
+  const [deviceId, setDeviceId] = useState()
 
-const { track } = useAnalytics();
+  const { track } = useAnalytics();
   function validatePhone(phone: string | undefined) {
     const phoneRegExp = /^\+?[1-9]\d{1,14}$/; // E.164 format
     return yup
@@ -145,7 +145,7 @@ const { track } = useAnalytics();
       .matches(phoneRegExp, 'Phone number is not valid. It must start with a country code (e.g., +234)')
       .isValidSync(phone);
   }
-  
+
   function validateEmail(email: string | undefined) {
     return yup.string().email('Please enter a valid email').isValidSync(email);
   }
@@ -174,7 +174,7 @@ const { track } = useAnalytics();
   //     }
   //   } catch (error) {
   //     console.log('Error signing in: ', error);
-     
+
 
   //   }
   //   setIsloadingGoogle(false)
@@ -240,7 +240,7 @@ const { track } = useAnalytics();
   const {
     control,
     handleSubmit,
-    formState: {errors, isValid},
+    formState: { errors, isValid },
   } = useForm<FormValues>({
     resolver: yupResolver<FormValues>(validationSchema),
     defaultValues: {
@@ -250,7 +250,7 @@ const { track } = useAnalytics();
 
   const getGoogleIcon = useCallback(
     () => (
-      <CustomTouchableSVG onPress={() => {}}>
+      <CustomTouchableSVG onPress={() => { }}>
         <GoogleButtonSVG />
       </CustomTouchableSVG>
     ),
@@ -259,7 +259,7 @@ const { track } = useAnalytics();
 
   const getAppleIcon = useCallback(
     () => (
-      <CustomTouchableSVG onPress={() => {}}>
+      <CustomTouchableSVG onPress={() => { }}>
         <AppleButtonSVG />
       </CustomTouchableSVG>
     ),
@@ -314,7 +314,7 @@ const { track } = useAnalytics();
 
   const onContinueAsGuestPress = useCallback(() => {
     // navigation.dispatch(locationScreenPushAction());
-    dispatchStore(setCreateAccountForm({isGuest: true}));
+    dispatchStore(setCreateAccountForm({ isGuest: true }));
   }, [navigation]);
 
   const onSubmit = () => {
@@ -323,49 +323,38 @@ const { track } = useAnalytics();
 
   useEffect(() => {
     if (validatePhone(emailOrPhone)) {
-      dispatchStore(setCreateAccountForm({phone: emailOrPhone, email: ''}));
+      dispatchStore(setCreateAccountForm({ phone: emailOrPhone, email: '' }));
       return;
     }
     if (validateEmail(emailOrPhone)) {
-      dispatchStore(setCreateAccountForm({phone: '', email: emailOrPhone}));
+      dispatchStore(setCreateAccountForm({ phone: '', email: emailOrPhone }));
       return;
     } else {
-      dispatchStore(setCreateAccountForm({phone: '', email: ''}));
+      dispatchStore(setCreateAccountForm({ phone: '', email: '' }));
     }
   }, [emailOrPhone, dispatchStore]);
 
   useEffect(() => {
-    getBaseUrlFromStorage();   
-    getBaseUrlFromEmail(email); 
-  }, [email]);  
+    getBaseUrlFromStorage();
+    getBaseUrlFromEmail(email);
+  }, [email]);
 
   // useEffect(() => {
   //   if(DeviceInfo.getUniqueId()){
   //     setDeviceId(DeviceInfo.getUniqueId()?._j)
   //   }
   // }, [DeviceInfo.getUniqueId()])
-  
+
   const handleGuestLogin = async () => {
     setIsLoadings(true);
     try {
-      // Явно инициализируем Segment перед отправкой события
-      await initSegment();
-      
-      console.log('Trying to track event');
-      track('Continue as Guest', {
-        productId: 123,
-        productName: 'Striped trousers',
+      const deviceId = await DeviceInfo.getUniqueId();
+      dispatchStore({
+        type: GUEST_LOGIN,
+        payload: {
+          deviceId
+        },
       });
-      console.log('Continue as Guest');
-      
-      // Раскомментируйте этот код, когда будете готовы использовать гостевой вход
-      // const deviceId = await DeviceInfo.getUniqueId();
-      // dispatchStore({
-      //   type: GUEST_LOGIN,
-      //   payload: {
-      //     deviceId
-      //   },
-      // });
     } catch (error) {
       console.error('Error in guest login:', error);
     } finally {
@@ -403,7 +392,7 @@ const { track } = useAnalytics();
           <Controller
             control={control}
             name="emailOrPhone"
-            render={({field: {onChange, onBlur, value}}) => {
+            render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <CustomTextInput
                   value={value}
@@ -467,16 +456,16 @@ const { track } = useAnalytics();
             />
           )} */}
 
-                     <CustomButton
-                      loading={isloadings}
-                      onPress={handleGuestLogin}
-                        text="Continue as Guest asd"
-                        touchableBackgroundColor={colors.black}
-                        textColor={colors.white}
-                        btnContainerStyle={styles.btnContainer}
-                        containerStyle={[styles.appleButton, styles.shadow]}
-                        active
-                      />
+          <CustomButton
+            loading={isloadings}
+            onPress={handleGuestLogin}
+            text="Continue as Guest"
+            touchableBackgroundColor={colors.black}
+            textColor={colors.white}
+            btnContainerStyle={styles.btnContainer}
+            containerStyle={[styles.appleButton, styles.shadow]}
+            active
+          />
           <View style={styles.otherOptions}>
             <View style={styles.loginNowRow}>
               <CustomText
@@ -501,7 +490,7 @@ const { track } = useAnalytics();
                 type="link2"
                 style={styles.continueAsGuest}
               /> */}
-              
+
             </View>
           </View>
         </ScrollView>
