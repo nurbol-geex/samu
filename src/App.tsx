@@ -30,6 +30,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import {injectParamsToURL, logAnalyticsEvent} from './utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import appsFlyer from 'react-native-appsflyer';
+import {initSegment} from './segmentService';
 
 // RNPaystack.init({
 //   publicKey: PAY_STACK_LIVE_KEY,
@@ -70,7 +71,12 @@ LogBox.ignoreAllLogs();
 const App = () => {
   useEffect(() => {
     const init = async () => {
-      // …do multiple sync or async tasks
+      try {
+        await initSegment();
+        console.log('Segment initialized successfully');
+      } catch (error) {
+        console.error('Failed to initialize app:', error);
+      }
     };
     init().finally(() => {
       setTimeout(async () => {

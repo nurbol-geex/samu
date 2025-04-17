@@ -48,6 +48,7 @@ import {GUEST_LOGIN, SOCIAL_AUTH} from 'src/redux/user/constants';
 import { storage } from 'src/redux/MMKVStorage';
 import useGuestLocation from 'src/utils/hooks/useGuestLocation';
 import DeviceInfo from 'react-native-device-info';
+import { useAnalytics, initSegment } from 'src/segmentService';
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
@@ -135,6 +136,8 @@ export default function SignUpScreen() {
   const isOnboard = useReduxSelector(store => store.settings.isOnBoard);
   const [isloadingGoogle, setIsloadingGoogle] = useState(false);
 const[deviceId,setDeviceId]=useState()
+
+const { track } = useAnalytics();
   function validatePhone(phone: string | undefined) {
     const phoneRegExp = /^\+?[1-9]\d{1,14}$/; // E.164 format
     return yup
@@ -343,13 +346,31 @@ const[deviceId,setDeviceId]=useState()
   // }, [DeviceInfo.getUniqueId()])
   
   const handleGuestLogin = async () => {
-  const deviceId = await DeviceInfo.getUniqueId();
-    dispatchStore({
-      type: GUEST_LOGIN,
-      payload: {
-        deviceId
-      },
-    });
+    setIsLoadings(true);
+    try {
+      // Явно инициализируем Segment перед отправкой события
+      await initSegment();
+      
+      console.log('Trying to track event');
+      track('Continue as Guest', {
+        productId: 123,
+        productName: 'Striped trousers',
+      });
+      console.log('Continue as Guest');
+      
+      // Раскомментируйте этот код, когда будете готовы использовать гостевой вход
+      // const deviceId = await DeviceInfo.getUniqueId();
+      // dispatchStore({
+      //   type: GUEST_LOGIN,
+      //   payload: {
+      //     deviceId
+      //   },
+      // });
+    } catch (error) {
+      console.error('Error in guest login:', error);
+    } finally {
+      setIsLoadings(false);
+    }
   };
 
   return (
@@ -449,7 +470,7 @@ const[deviceId,setDeviceId]=useState()
                      <CustomButton
                       loading={isloadings}
                       onPress={handleGuestLogin}
-                        text="Continue as Guest"
+                        text="Continue as Guest asd"
                         touchableBackgroundColor={colors.black}
                         textColor={colors.white}
                         btnContainerStyle={styles.btnContainer}

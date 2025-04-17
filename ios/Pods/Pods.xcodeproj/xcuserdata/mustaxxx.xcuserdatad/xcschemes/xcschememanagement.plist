@@ -599,6 +599,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>react-native-get-random-values.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>react-native-google-maps.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -640,6 +645,16 @@
 			<false/>
 		</dict>
 		<key>react-native-zendesk-messaging.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>segment-analytics-react-native.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>sovran-react-native.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
